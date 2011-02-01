@@ -6,6 +6,7 @@ static gchar* output = "foo.png";
 static gint width = 0;
 static gint height = 0;
 static gchar* css = NULL;
+static gint delay = 0;
 
 static GOptionEntry entries[] =
 {
@@ -14,9 +15,12 @@ static GOptionEntry entries[] =
   { "width", 'w', 0, G_OPTION_ARG_INT, &width, "Width", "WIDTH" },
   { "height", 'h', 0, G_OPTION_ARG_INT, &height, "Height", "HEIGHT" },
   { "css", 'c', 0, G_OPTION_ARG_STRING, &css, "CSS file", "CSS" },
+  { "delay", 'd', 0, G_OPTION_ARG_INT, &delay, "Delay", "DELAY" },
   { NULL }
 };
 
+static WebKitWebView *view = NULL;
+static GtkWidget *window = NULL;
 
 static cairo_surface_t *
 gdk_pixbuf_to_cairo_surface (GdkPixbuf *pixbuf)
@@ -114,17 +118,14 @@ gdk_pixbuf_to_cairo_surface (GdkPixbuf *pixbuf)
   return surface;
 }
 
-static void
-status_cb (WebKitWebView *view, GParamSpec *spec, GtkWidget *window)
+static gboolean
+take_photo (gpointer data)
 {
-    GdkPixbuf *p;
-    cairo_surface_t *s;
-    WebKitLoadStatus status;
-
-    status = webkit_web_view_get_load_status (view);
-    if (status == WEBKIT_LOAD_FINISHED) {
+        GdkPixbuf *p;
+        cairo_surface_t *s;
         GtkRequisition req;
         GtkAllocation alloc;
+
         gtk_widget_size_request (GTK_WIDGET (view), &req);
         alloc.x = alloc.y = 0;
         alloc.width = width ? width : req.width;
@@ -141,6 +142,20 @@ status_cb (WebKitWebView *view, GParamSpec *spec, GtkWidget *window)
         cairo_surface_write_to_png (s, output);
 
         gtk_main_quit ();
+
+        return true;
+}
+
+static void
+status_cb (WebKitWebView *view1, GParamSpec *spec, GtkWidget *window1)
+{
+    WebKitLoadStatus status;
+    view = view1;
+    window = window1;
+
+    status = webkit_web_view_get_load_status (view);
+    if (status == WEBKIT_LOAD_FINISHED) {
+        g_timeout_add_seconds (delay, take_photo, NULL);
     }
 }
 
