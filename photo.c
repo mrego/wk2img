@@ -2,7 +2,7 @@
 #include <webkit/webkit.h>
 
 static gchar* url = NULL;
-static gchar* output = "foo.png";
+static gchar* output = "output.png";
 static gint width = 0;
 static gint height = 0;
 static gchar* css = NULL;
@@ -10,12 +10,12 @@ static gint delay = 0;
 
 static GOptionEntry entries[] =
 {
-  { "url", 'u', 0, G_OPTION_ARG_STRING, &url, "URL", "URL" },
-  { "output", 'o', 0, G_OPTION_ARG_STRING, &output, "Output file", "OUTPUT" },
-  { "width", 'w', 0, G_OPTION_ARG_INT, &width, "Width", "WIDTH" },
-  { "height", 'h', 0, G_OPTION_ARG_INT, &height, "Height", "HEIGHT" },
-  { "css", 'c', 0, G_OPTION_ARG_STRING, &css, "CSS file", "CSS" },
-  { "delay", 'd', 0, G_OPTION_ARG_INT, &delay, "Delay", "DELAY" },
+  { "url", 'u', 0, G_OPTION_ARG_STRING, &url, "URL", NULL },
+  { "output", 'o', 0, G_OPTION_ARG_STRING, &output, "Output file (default output.png)", NULL },
+  { "width", 'w', 0, G_OPTION_ARG_INT, &width, "Width", NULL },
+  { "height", 'h', 0, G_OPTION_ARG_INT, &height, "Height", NULL },
+  { "css", 'c', 0, G_OPTION_ARG_STRING, &css, "CSS file", NULL },
+  { "delay", 'd', 0, G_OPTION_ARG_INT, &delay, "Delay in seconds", NULL },
   { NULL }
 };
 
@@ -176,6 +176,7 @@ int main(int argc, char* argv[])
     }
 
     if (url == NULL) {
+        g_print ("ERROR: Missing URL\n%s", g_option_context_get_help (context, TRUE, NULL));
         return 1;
     }
 
