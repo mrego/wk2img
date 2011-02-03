@@ -1,4 +1,6 @@
 /*
+ * photo.c - WebKitGTK+ Page Rendering Capture
+ *
  * Copyright (C) 2011 Igalia, S.L.
  *
  * This file is published under the GNU GPLv3.
@@ -25,7 +27,8 @@ static GOptionEntry entries[] =
     { "width", 'w', 0, G_OPTION_ARG_INT, &width, "Width", NULL },
     { "height", 'h', 0, G_OPTION_ARG_INT, &height, "Height", NULL },
     { "css", 'c', 0, G_OPTION_ARG_STRING, &css, "CSS file", NULL },
-    { "delay", 'd', 0, G_OPTION_ARG_INT, &delay, "Delay in seconds", NULL },
+    { "delay", 'd', 0, G_OPTION_ARG_INT, &delay,
+        "Delay in milliseconds", NULL },
     { NULL }
 };
 
@@ -165,7 +168,7 @@ status_cb (WebKitWebView *view1, GParamSpec *spec, GtkWidget *window1)
 
     status = webkit_web_view_get_load_status (view);
     if (status == WEBKIT_LOAD_FINISHED) {
-        g_timeout_add_seconds (delay, take_photo, NULL);
+        g_timeout_add (delay, take_photo, NULL);
     }
 }
 
@@ -177,7 +180,7 @@ int main(int argc, char* argv[])
 
     gtk_init(&argc, &argv);
 
-    context = g_option_context_new ("photo");
+    context = g_option_context_new ("WebKitGTK+ Page Rendering Capture");
     g_option_context_add_main_entries (context, entries, NULL);
     g_option_context_add_group (context, gtk_get_option_group (TRUE));
     if (!g_option_context_parse (context, &argc, &argv, &error)) {
