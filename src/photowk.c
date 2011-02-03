@@ -1,17 +1,16 @@
 /*
- * photowk.c - WebKitGTK+ Page Rendering Capture
+ * photowk.c - WebKitGTK+ Rendering Capture Tool
  *
  * Copyright (C) 2011 Igalia, S.L.
  *
  * This file is published under the GNU GPLv3.
- *
  */
 
 #include <gtk/gtk.h>
 #include <webkit/webkit.h>
 #include "config.h"
 
-#define DESCRIPTION "WebKitGTK+ Page Rendering Capture"
+#define DESCRIPTION "WebKitGTK+ Rendering Capture Tool"
 
 static gchar* url = NULL;
 static gchar* output = "output.png";
