@@ -9,6 +9,9 @@
 
 #include <gtk/gtk.h>
 #include <webkit/webkit.h>
+#include "config.h"
+
+#define DESCRIPTION "WebKitGTK+ Page Rendering Capture"
 
 static gchar* url = NULL;
 static gchar* output = "output.png";
@@ -16,6 +19,7 @@ static gint width = 0;
 static gint height = 0;
 static gchar* css = NULL;
 static gint delay = 0;
+gboolean version = FALSE;
 
 static GOptionEntry entries[] =
 {
@@ -27,6 +31,8 @@ static GOptionEntry entries[] =
     { "css", 'c', 0, G_OPTION_ARG_STRING, &css, "CSS file", NULL },
     { "delay", 'd', 0, G_OPTION_ARG_INT, &delay,
         "Delay in milliseconds", NULL },
+    { "version", 'v', 0, G_OPTION_ARG_NONE, &version,
+        "Show version and exit", NULL },
     { NULL }
 };
 
@@ -184,12 +190,18 @@ int main(int argc, char* argv[])
 
     gtk_init(&argc, &argv);
 
-    context = g_option_context_new ("WebKitGTK+ Page Rendering Capture");
+    context = g_option_context_new (DESCRIPTION);
     g_option_context_add_main_entries (context, entries, NULL);
     g_option_context_add_group (context, gtk_get_option_group (TRUE));
     if (!g_option_context_parse (context, &argc, &argv, &error)) {
         g_print ("Option parsing failed: %s\n", error->message);
         return 1;
+    }
+
+    if (version) {
+        g_print ("%s - %s\nVersion: %s\n",
+            PACKAGE_NAME, DESCRIPTION, PACKAGE_VERSION);
+        return 0;
     }
 
     if (url == NULL) {

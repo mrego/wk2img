@@ -53,6 +53,6 @@ AC_OUTPUT
 #********
 
 echo ""
-echo "$PACKAGE_NAME $PACKAGE_VERSION"
+echo "$PACKAGE_STRING"
 echo "============="
 echo ""
