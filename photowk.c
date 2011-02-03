@@ -1,11 +1,11 @@
 /*
- * photo.c - WebKitGTK+ Page Rendering Capture
+ * photowk.c - WebKitGTK+ Page Rendering Capture
  *
  * Copyright (C) 2011 Igalia, S.L.
  *
  * This file is published under the GNU GPLv3.
  *
- * Comiple: gcc -o photo photo.c `pkg-config --cflags --libs webkit-1.0`
+ * Comiple: gcc -o photowk photowk.c `pkg-config --cflags --libs webkit-1.0`
  *
  */
 
@@ -168,7 +168,13 @@ status_cb (WebKitWebView *view1, GParamSpec *spec, GtkWidget *window1)
 
     status = webkit_web_view_get_load_status (view);
     if (status == WEBKIT_LOAD_FINISHED) {
+        g_debug ("Web load finished");
+        if (delay > 0) {
+            g_debug ("Waiting %d ms", delay);
+        }
         g_timeout_add (delay, take_photo, NULL);
+    } else if (status == WEBKIT_LOAD_FAILED) {
+        g_error ("Web load failed!");
     }
 }
 
@@ -189,9 +195,8 @@ int main(int argc, char* argv[])
     }
 
     if (url == NULL) {
-        g_print ("ERROR: Missing URL\n%s",
+        g_error ("Missing URL\n%s",
                 g_option_context_get_help (context, TRUE, NULL));
-        return 1;
     }
 
     view = webkit_web_view_new ();
