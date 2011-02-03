@@ -5,8 +5,6 @@
  *
  * This file is published under the GNU GPLv3.
  *
- * Comiple: gcc -o photowk photowk.c `pkg-config --cflags --libs webkit-1.0`
- *
  */
 
 #include <gtk/gtk.h>
@@ -195,7 +193,7 @@ int main(int argc, char* argv[])
     }
 
     if (url == NULL) {
-        g_error ("Missing URL\n%s",
+        g_error ("Missing URL\n\n%s",
                 g_option_context_get_help (context, TRUE, NULL));
     }
 
