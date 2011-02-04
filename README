@@ -2,3 +2,39 @@ wk2img
 ======
 
 WebKitGTK+ Rendering Capture Tool.
+
+
+Requirements
+------------
+
+*wk2img* depends on:
+
+* WebKitGTK+ (``webkit-1.0``)
+
+
+Installation
+------------
+
+See the ``INSTALL`` file.
+
+
+Availability
+------------
+
+The cutting-edge version of this project is always available from the Git
+repository at http://gitorious.org/wk2img/.
+
+
+License
+-------
+
+*wk2img* is released under the terms of the GNU General Public License
+version 3, or (at your option) any later version.
+
+Please read the ``COPYING`` file for details.
+
+
+Authors
+-------
+
+See the ``AUTHORS`` file.
