@@ -1,0 +1,13 @@
+Source: photowk
+Section: web
+Priority: optional
+Maintainer: Manuel Rego Casasnovas <mrego@igalia.com>
+Build-Depends: debhelper (>= 7.0.50), libwebkit-dev
+Standards-Version: 3.8.4
+
+Package: photowk
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: WebKitGTK+ Rendering Capture Tool
+ PhotoWK is a small command-line utility to capture WebKitGTK+
+ rendering of a web page into a image file.
