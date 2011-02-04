@@ -198,8 +198,9 @@ int main(int argc, char* argv[])
     }
 
     if (version) {
-        g_print ("%s - %s\nVersion: %s\n",
-            PACKAGE_NAME, DESCRIPTION, PACKAGE_VERSION);
+        g_print ("%s - %s\nCopyright (C) 2011 Igalia, S.L.\n",
+            PACKAGE_STRING, DESCRIPTION);
+
         return 0;
     }
 
