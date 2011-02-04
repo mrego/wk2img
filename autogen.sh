@@ -4,7 +4,7 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="photowk"
+PKG_NAME="wk2img"
 
 (test -f $srcdir/Makefile.am) || {
 	echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"

@@ -1,12 +1,12 @@
 INCLUDES =              \
     -I$(top_srcdir)     \
     $(WARN_CFLAGS)      \
-    $(PHOTOWK_CFLAGS)
+    $(WK2IMG_CFLAGS)
 
-bin_PROGRAMS = photowk
+bin_PROGRAMS = wk2img
 
-photowk_SOURCES =   \
-    photowk.c
+wk2img_SOURCES =   \
+    main.c
 
-photowk_LDFLAGS =   \
-    $(PHOTOWK_LIBS)
+wk2img_LDFLAGS =   \
+    $(WK2IMG_LIBS)

@@ -1,5 +1,5 @@
 /*
- * photowk.c - WebKitGTK+ Rendering Capture Tool
+ * main.c - WebKitGTK+ Rendering Capture Tool
  *
  * Copyright (C) 2011 Igalia, S.L.
  *
