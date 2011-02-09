@@ -38,7 +38,7 @@ static GOptionEntry entries[] =
 static WebKitWebView *view = NULL;
 static GtkWidget *window = NULL;
 
-    static cairo_surface_t *
+static cairo_surface_t *
 gdk_pixbuf_to_cairo_surface (GdkPixbuf *pixbuf)
 {
     static const cairo_user_data_key_t key;
@@ -134,7 +134,7 @@ gdk_pixbuf_to_cairo_surface (GdkPixbuf *pixbuf)
     return surface;
 }
 
-    static gboolean
+static gboolean
 take_photo (gpointer data)
 {
     GdkPixbuf *p;
@@ -162,7 +162,7 @@ take_photo (gpointer data)
     return true;
 }
 
-    static void
+static void
 status_cb (WebKitWebView *view1, GParamSpec *spec, GtkWidget *window1)
 {
     WebKitLoadStatus status;
